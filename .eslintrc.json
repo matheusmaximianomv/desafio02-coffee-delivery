@@ -30,14 +30,6 @@
     "no-use-before-define": "off",
     "camelcase": "error",
     "no-console": "error",
-    "@typescript-eslint/typedef": [
-      "error",
-      {
-        "parameter": true,
-        "propertyDeclaration": false,
-        "variableDeclaration": true
-      }
-    ],
     "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/triple-slash-reference": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
