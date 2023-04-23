@@ -1,0 +1,46 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "standard-with-typescript",
+    "prettier"
+  ],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": ["./tsconfig.json"]
+  },
+  "plugins": ["react", "prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "react/jsx-filename-extension": [
+      "warn",
+      { "extensions": [".jsx", ".js", ".tsx", ".ts"] }
+    ],
+    "import/prefer-default-export": "off",
+    "import/extensions": [
+      "warn",
+      { "extensions": ["jsx", ".js", ".tsx", ".ts"] }
+    ],
+    "no-use-before-define": "off",
+    "camelcase": "error",
+    "no-console": "error",
+    "@typescript-eslint/typedef": [
+      "error",
+      {
+        "parameter": true,
+        "propertyDeclaration": false,
+        "variableDeclaration": true
+      }
+    ],
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/triple-slash-reference": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "react/react-in-jsx-scope": "off"
+  }
+}
