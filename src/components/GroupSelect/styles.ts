@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
-import { ReactElement } from 'react';
+import { ReactNode } from 'react';
 
 export interface IGroupSelectOptions {
   id: string;
   label: string;
-  icon: ReactElement;
   selected: boolean;
+  renderIcon: (color: string, size: number) => ReactNode;
 }
 
 type TypeSelectProps = Pick<IGroupSelectOptions, 'selected'>;

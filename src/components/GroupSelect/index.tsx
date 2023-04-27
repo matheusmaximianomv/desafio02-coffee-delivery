@@ -1,12 +1,10 @@
-import { cloneElement, ReactElement, useState } from 'react';
+import { useState } from 'react';
 
 import { IGroupSelectOptions, GroupSelectContainer, Select } from './styles';
 
 export interface IGroupSelectProps {
   options: IGroupSelectOptions[];
 }
-
-type TypeIconProps = ReactElement & { size: number; color: string };
 
 export function GroupSelect({ options }: IGroupSelectProps) {
   const [optionSelectedId, setOptionSelectedId] = useState<string | null>(
@@ -21,10 +19,6 @@ export function GroupSelect({ options }: IGroupSelectProps) {
     }
   );
 
-  function createElementIcon(icon: ReactElement): ReactElement {
-    return cloneElement<TypeIconProps>(icon, { color: '#8047F8', size: 18 });
-  }
-
   function handleSetSelectOption(idTarget: string): void {
     setOptionSelectedId(idTarget);
     options.forEach((option) => (option.selected = option.id === idTarget));
@@ -32,7 +26,7 @@ export function GroupSelect({ options }: IGroupSelectProps) {
 
   return (
     <GroupSelectContainer>
-      {options.map(({ id, label, icon }) => (
+      {options.map(({ id, label, renderIcon }) => (
         <Select
           key={id}
           selected={id === optionSelectedId}
@@ -40,7 +34,7 @@ export function GroupSelect({ options }: IGroupSelectProps) {
             handleSetSelectOption(id);
           }}
         >
-          {createElementIcon(icon)}
+          {renderIcon('#8047F8', 18)}
           {label}
         </Select>
       ))}
