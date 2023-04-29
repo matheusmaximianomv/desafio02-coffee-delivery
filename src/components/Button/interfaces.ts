@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, ButtonHTMLAttributes } from 'react';
 import { DefaultTheme } from 'styled-components';
 
 interface IGroupColors {
@@ -22,7 +22,7 @@ export type TypePaddingOptionsButton = Record<TypeButtonSize, string>;
 
 export type TypeColorsOptionsButton = Record<TypeButtonVariant, IGroupColors>;
 
-export interface IButtonProps {
+export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size: TypeButtonSize;
   variant: TypeButtonVariant;
   badge?: number;
