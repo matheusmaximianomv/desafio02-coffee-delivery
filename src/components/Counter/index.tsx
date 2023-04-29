@@ -5,17 +5,22 @@ import { CounterContainer, CounterButton } from './styles';
 
 export interface ICounterProps {
   value: number;
+  min?: number;
   onChange: (currentValue: number) => void;
 }
 
 const MIN_VALUE = 0;
 
-export function Counter({ value = MIN_VALUE, onChange }: ICounterProps) {
+export function Counter({
+  value = MIN_VALUE,
+  min = MIN_VALUE,
+  onChange,
+}: ICounterProps) {
   const [counterValue, setCounterValue] = useState<number>(value);
 
   function handleDecreaseValue(): void {
     setCounterValue((state) => {
-      const newState = state === MIN_VALUE ? state : --state;
+      const newState = state === min ? state : --state;
 
       onChange(newState);
 
