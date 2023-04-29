@@ -7,7 +7,7 @@ interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function Input({ optional, ...props }: IInputProps) {
-  const [inputValue, setInputValue] = useState<any>(null);
+  const [inputValue, setInputValue] = useState<string | number | null>(null);
   const [hasFocus, setHasFocus] = useState<boolean>(false);
 
   const showOptionalInformation = !!optional && !inputValue && !hasFocus;
