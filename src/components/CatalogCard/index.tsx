@@ -1,5 +1,10 @@
 import { ShoppingCartSimple } from 'phosphor-react';
 
+import { formatPrice } from '../../utils/formatPrice';
+
+import { Counter } from '../Counter';
+import { Button } from '../Button';
+
 import {
   CatalogCardContainer,
   CatalogImage,
@@ -12,9 +17,6 @@ import {
   CatalogPrice,
   CatalogAction,
 } from './styles';
-
-import { Counter } from '../Counter';
-import { Button } from '../Button';
 
 interface IEventAddItems {
   id: string;
@@ -77,7 +79,7 @@ export function CatalogCard({
       <CatalogBuy>
         <CatalogPrice>
           <span>R$</span>
-          <strong>{price}</strong>
+          <strong>{formatPrice(price)}</strong>
         </CatalogPrice>
 
         <CatalogAction>
