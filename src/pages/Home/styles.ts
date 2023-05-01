@@ -18,6 +18,10 @@ export const HomeIntroduction = styled.section`
 
   background: url(${backgroundImg}) center no-repeat;
   background-size: cover;
+
+  @media (max-width: 78.125rem) {
+    height: auto;
+  }
 `;
 
 export const HomeIntroductionContent = styled.article`
@@ -28,6 +32,10 @@ export const HomeIntroductionContent = styled.article`
   align-items: center;
   justify-content: space-between;
   gap: 3.5rem;
+
+  @media (max-width: 78.125rem) {
+    flex-direction: column;
+  }
 `;
 
 export const HomePresentation = styled.div`
@@ -99,3 +107,48 @@ export const HomeListItem = styled.li<IHomeListItemProps>`
 `;
 
 export const HomeImage = styled.img``;
+
+export const HomeCoffeeList = styled.section`
+  padding: 2rem 10rem;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+`;
+
+export const HomeCoffeeListContent = styled.article`
+  width: 100%;
+  max-width: 70rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 2.125rem;
+`;
+
+export const HomeCoffeeListTitle = styled.h2`
+  font-family: 'Baloo 2';
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 2.625rem;
+
+  color: ${(props) => props.theme['gray-700']};
+`;
+
+export const HomeCoffeeListOptions = styled.div`
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 2rem 2.5rem;
+
+  @media (max-width: 82.5rem) {
+    grid-template-columns: repeat(3, auto);
+  }
+
+  @media (max-width: 62.5rem) {
+    grid-template-columns: repeat(2, auto);
+  }
+`;

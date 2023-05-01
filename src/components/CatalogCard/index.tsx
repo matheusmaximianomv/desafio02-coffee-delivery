@@ -18,7 +18,7 @@ import {
   CatalogAction,
 } from './styles';
 
-interface IEventAddItems {
+export interface IEventAddItems {
   id: string;
   price: number;
   quantity: number;
@@ -31,7 +31,7 @@ export interface ICatalogCardProps {
   name: string;
   description: string;
   price: number;
-  initialQuantity: number;
+  initialQuantity?: number;
   handleEventAddItemsToCart: (event: IEventAddItems) => void;
 }
 
@@ -42,7 +42,7 @@ export function CatalogCard({
   name,
   description,
   price,
-  initialQuantity,
+  initialQuantity = 0,
   handleEventAddItemsToCart,
 }: ICatalogCardProps) {
   let quantity = 0;
@@ -90,11 +90,7 @@ export function CatalogCard({
             }}
           />
 
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={(_) => handleAddItemsToCart}
-          >
+          <Button variant="secondary" size="sm" onClick={handleAddItemsToCart}>
             <ShoppingCartSimple size={22} color="white" weight="fill" />
           </Button>
         </CatalogAction>

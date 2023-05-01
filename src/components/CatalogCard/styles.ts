@@ -34,7 +34,6 @@ export const CatalogTag = styled.span`
   align-items: center;
   padding: 0.25rem 0.5rem;
 
-  width: 5.063rem;
   height: 1.313rem;
 
   background: ${(props) => props.theme['yellow-300']};

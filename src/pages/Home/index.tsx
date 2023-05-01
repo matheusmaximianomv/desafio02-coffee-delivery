@@ -1,18 +1,32 @@
+import { useId } from 'react';
 import { ShoppingCart, Package, Coffee, Timer } from 'phosphor-react';
 
-import {
-  HomeImage,
-  HomeIntroduction,
-  HomeIntroductionContent,
-  HomeList,
-  HomeListItem,
-  HomePresentation,
-  HomeTitle,
-} from './styles';
-
+import { CatalogCard, IEventAddItems } from '../../components/CatalogCard';
 import coffeeImg from '../../assets/coffee.svg';
 
+import {
+  HomeIntroduction,
+  HomeIntroductionContent,
+  HomePresentation,
+  HomeTitle,
+  HomeList,
+  HomeListItem,
+  HomeImage,
+  HomeCoffeeList,
+  HomeCoffeeListContent,
+  HomeCoffeeListTitle,
+  HomeCoffeeListOptions,
+} from './styles';
+
+import { generateCatalogsCard } from './utils/generateCatalogsCard';
+
 export function Home() {
+  function handleChooseQuantityCard(event: IEventAddItems): void {
+    // console.log(event);
+  }
+
+  const catalogOptions = generateCatalogsCard(useId, handleChooseQuantityCard);
+
   return (
     <main>
       <HomeIntroduction>
@@ -58,6 +72,18 @@ export function Home() {
           <HomeImage src={coffeeImg} />
         </HomeIntroductionContent>
       </HomeIntroduction>
+
+      <HomeCoffeeList>
+        <HomeCoffeeListContent>
+          <HomeCoffeeListTitle>Nossos cafés</HomeCoffeeListTitle>
+
+          <HomeCoffeeListOptions>
+            {catalogOptions.map((catalog) => (
+              <CatalogCard key={catalog.id} {...catalog} />
+            ))}
+          </HomeCoffeeListOptions>
+        </HomeCoffeeListContent>
+      </HomeCoffeeList>
     </main>
   );
 }
