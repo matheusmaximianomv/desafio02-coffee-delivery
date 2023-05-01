@@ -1,10 +1,11 @@
-import { useState, InputHTMLAttributes } from 'react';
+import { useState } from 'react';
 
-import { LabelContainer, InputContainer, TagOptional } from './styles';
-
-interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  optional?: boolean;
-}
+import {
+  LabelContainer,
+  InputContainer,
+  TagOptional,
+  IInputProps,
+} from './styles';
 
 export function Input({ optional, ...props }: IInputProps) {
   const [inputValue, setInputValue] = useState<string | number | null>(null);

@@ -1,4 +1,29 @@
+import { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
+
+export type TypeSizesInput =
+  | 'xl'
+  | 'lg'
+  | 'md'
+  | 'sm'
+  | 'xs'
+  | 'full'
+  | 'default';
+
+export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  width: TypeSizesInput;
+  optional?: boolean;
+}
+
+const sizeInRem: Record<TypeSizesInput, string> = {
+  xl: '35rem',
+  lg: '21.75rem',
+  md: '17.25rem',
+  sm: '12.5rem',
+  xs: '3.75rem',
+  default: '27.125rem',
+  full: '100%',
+};
 
 export const LabelContainer = styled.label`
   position: relative;
@@ -17,12 +42,13 @@ export const TagOptional = styled.span`
   color: ${(props) => props.theme['gray-500']};
 `;
 
-export const InputContainer = styled.input`
+export const InputContainer = styled.input<IInputProps>`
   display: flex;
   align-items: center;
   gap: 0.25rem;
 
-  min-width: 27.125rem;
+  width: ${(props) =>
+    props.width ? sizeInRem[props.width] : sizeInRem.default};
   height: 2.625rem;
 
   padding: 0.75rem;
