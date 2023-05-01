@@ -43,6 +43,15 @@ export const OrderCardContainer = styled.article`
   border-radius: 6px;
 `;
 
+export const OrderCardContainerCart = styled(OrderCardContainer)`
+  border-radius: 6px 44px;
+  gap: 1.5rem;
+
+  button {
+    width: 100%;
+  }
+`;
+
 export const OrderCardTitle = styled.div<IOrderCardTitleProps>`
   display: flex;
   align-items: flex-start;
@@ -87,4 +96,60 @@ export const OrderFieldGroup = styled.div`
   align-items: center;
   justify-content: flex-start;
   gap: 0.75rem;
+`;
+
+export const OrderSeparator = styled.div`
+  width: 23rem;
+  height: 0rem;
+
+  border: 1px solid ${(props) => props.theme['gray-300']};
+`;
+
+export const PurchaseSummaryContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  width: 100%;
+`;
+
+export const PurchaseSummary = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const PurchaseSummaryItems = styled(PurchaseSummary)`
+  span {
+    color: ${(props) => props.theme['gray-600']};
+
+    &:first-child {
+      font-size: 0.875rem;
+      line-height: 1.125rem;
+    }
+
+    &:last-child {
+      font-size: 1rem;
+      line-height: 1.313rem;
+      color: #574f4d;
+    }
+  }
+`;
+
+export const PurchaseSummaryTotal = styled(PurchaseSummary)`
+  span {
+    color: ${(props) => props.theme['gray-700']};
+
+    &:first-child {
+      font-weight: 700;
+      font-size: 1.25rem;
+      line-height: 1.625rem;
+    }
+
+    &:last-child {
+      font-weight: 700;
+      font-size: 1.25rem;
+      line-height: 1.625rem;
+    }
+  }
 `;

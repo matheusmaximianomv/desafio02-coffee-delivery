@@ -7,7 +7,7 @@ import expressoImg from '../../../assets/coffees/expresso.svg';
 import americanoImg from '../../../assets/coffees/americano.svg';
 import cremosoImg from '../../../assets/coffees/expresso_cremoso.svg';
 import geladoImg from '../../../assets/coffees/cafe_gelado.svg';
-import cafeComLeitoImg from '../../../assets/coffees/cafe_com_leite.svg';
+import cafeComLeiteImg from '../../../assets/coffees/cafe_com_leite.svg';
 import latteImg from '../../../assets/coffees/latte.svg';
 import capuccinoImg from '../../../assets/coffees/capuccino.svg';
 import macchiatoImg from '../../../assets/coffees/macchiato.svg';
@@ -61,7 +61,7 @@ export function generateCatalogsCard(
     },
     {
       id: hashFunction(),
-      coffeeImage: cafeComLeitoImg,
+      coffeeImage: cafeComLeiteImg,
       tags: ['Tradicional', 'Com Leite'],
       name: 'Café com Leite',
       description: 'Meio a meio de expresso tradicional com leite vaporizado',
