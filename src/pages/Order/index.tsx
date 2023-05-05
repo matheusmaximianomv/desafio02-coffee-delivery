@@ -28,25 +28,24 @@ import {
   PurchaseSummaryItems,
   PurchaseSummaryTotal,
 } from './styles';
-import { useId } from 'react';
 
 export function Order() {
   const groupSelectProps: IGroupSelectProps = {
     options: [
       {
-        id: useId(),
+        id: '1',
         label: 'Cartão de Crédito',
         renderIcon: (color, size) => <CreditCard size={size} color={color} />,
         selected: false,
       },
       {
-        id: useId(),
+        id: '2',
         label: 'Cartão de Débito',
         renderIcon: (color, size) => <Bank size={size} color={color} />,
         selected: false,
       },
       {
-        id: useId(),
+        id: '3',
         label: 'Dinheiro',
         renderIcon: (color, size) => <Money size={size} color={color} />,
         selected: false,
