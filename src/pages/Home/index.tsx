@@ -2,10 +2,8 @@ import { useContext } from 'react';
 import { ShoppingCart, Package, Coffee, Timer } from 'phosphor-react';
 
 import { CatalogCard } from '../../components/CatalogCard';
-import {
-  IProduct,
-  ProductsContext,
-} from '../../contexts/products/ProductsContext';
+import { ProductsContext } from '../../contexts/products/ProductsContext';
+import { IProduct } from '../../reducers/products';
 import coffeeImg from '../../assets/coffee.svg';
 
 import {
