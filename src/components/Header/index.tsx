@@ -1,5 +1,8 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ShoppingCart, MapPin } from 'phosphor-react';
+
+import { ProductsContext } from '../../contexts/products/ProductsContext';
 
 import logoCoffeeDelivery from '../../assets/logo.svg';
 import { Button } from '../Button';
@@ -13,6 +16,8 @@ import {
 } from './styles';
 
 export function Header() {
+  const { productsSelected } = useContext(ProductsContext);
+
   return (
     <HeaderContainer>
       <HeaderContent>
@@ -26,7 +31,7 @@ export function Header() {
             <span>Juazeiro do norte, CE</span>
           </HeaderLocation>
           <NavLink to="/order" title="Carrinho">
-            <Button variant="simple" size="sm" badge={3}>
+            <Button variant="simple" size="sm" badge={productsSelected.length}>
               <ShoppingCart size={22} weight="fill" />
             </Button>
           </NavLink>

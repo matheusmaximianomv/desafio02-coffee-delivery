@@ -154,3 +154,11 @@ export const PurchaseSummaryTotal = styled(PurchaseSummary)`
     }
   }
 `;
+
+export const TitleNoData = styled.strong`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.313rem;
+  color: ${(props) => props.theme['gray-700']};
+`;

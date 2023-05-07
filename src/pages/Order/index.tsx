@@ -28,16 +28,15 @@ import {
   PurchaseSummaryContainer,
   PurchaseSummaryItems,
   PurchaseSummaryTotal,
+  TitleNoData,
 } from './styles';
 
 export function Order() {
-  const { products, updateInBatchProduct, removeProduct } =
+  const { productsSelected, updateInBatchProduct, removeProduct } =
     useContext(ProductsContext);
 
-  const productsSelected = products.filter((product) => product.quantity > 0);
-
   const deliveryPrice = 3.5;
-  const totalPriceProductsSelected = products.reduce(
+  const totalPriceProductsSelected = productsSelected.reduce(
     (accumulator, currentValue) =>
       accumulator + currentValue.price * currentValue.quantity,
     0
@@ -144,26 +143,32 @@ export function Order() {
             )
           )}
 
-          <PurchaseSummaryContainer>
-            <PurchaseSummaryItems>
-              <span>Total de itens</span>
-              <span>R$ {formatPrice(totalPriceProductsSelected)}</span>
-            </PurchaseSummaryItems>
+          {productsSelected.length > 0 ? (
+            <>
+              <PurchaseSummaryContainer>
+                <PurchaseSummaryItems>
+                  <span>Total de itens</span>
+                  <span>R$ {formatPrice(totalPriceProductsSelected)}</span>
+                </PurchaseSummaryItems>
 
-            <PurchaseSummaryItems>
-              <span>Entrega</span>
-              <span>R$ {formatPrice(deliveryPrice)}</span>
-            </PurchaseSummaryItems>
+                <PurchaseSummaryItems>
+                  <span>Entrega</span>
+                  <span>R$ {formatPrice(deliveryPrice)}</span>
+                </PurchaseSummaryItems>
 
-            <PurchaseSummaryTotal>
-              <span>Total</span>
-              <span>R$ {formatPrice(totalDelivery)}</span>
-            </PurchaseSummaryTotal>
-          </PurchaseSummaryContainer>
+                <PurchaseSummaryTotal>
+                  <span>Total</span>
+                  <span>R$ {formatPrice(totalDelivery)}</span>
+                </PurchaseSummaryTotal>
+              </PurchaseSummaryContainer>
 
-          <Button variant="primary" size="lg">
-            Confirmar Pedido
-          </Button>
+              <Button variant="primary" size="lg">
+                Confirmar Pedido
+              </Button>
+            </>
+          ) : (
+            <TitleNoData>Nenhum café foi selecionado.</TitleNoData>
+          )}
         </OrderCardContainerCart>
       </OrderColumn>
     </OrderContainer>

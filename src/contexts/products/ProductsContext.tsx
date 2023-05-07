@@ -19,9 +19,8 @@ export interface IProduct {
 
 interface IProductContextData {
   products: IProduct[];
-  addAProductUnit: (id: string) => void;
+  productsSelected: IProduct[];
   updateInBatchProduct: (id: string, quantity: number) => void;
-  removeAProductUnit: (id: string) => void;
   removeProduct: (id: string) => void;
 }
 
@@ -35,6 +34,8 @@ export function ProductsContextProvider({
   const [products, setProducts] = useState<IProduct[]>(
     generateCatalogsCard(useId)
   );
+
+  const productsSelected = products.filter((product) => product.quantity > 0);
 
   function findIndexProductById(
     products: IProduct[],
@@ -62,30 +63,6 @@ export function ProductsContextProvider({
     });
   }
 
-  function addAProductUnit(id: string): void {
-    setProducts((state) => {
-      return produce(state, (draft) => {
-        const index = findIndexProductById(draft, id);
-
-        if (indexIsValid(index)) {
-          draft[index as number].quantity += 1;
-        }
-      });
-    });
-  }
-
-  function removeAProductUnit(id: string): void {
-    setProducts((state) => {
-      return produce(state, (draft) => {
-        const index = findIndexProductById(draft, id);
-
-        if (indexIsValid(index) && draft[index as number].quantity > 1) {
-          draft[index as number].quantity -= 1;
-        }
-      });
-    });
-  }
-
   function removeProduct(id: string): void {
     setProducts((state) => {
       return produce(state, (draft) => {
@@ -102,9 +79,8 @@ export function ProductsContextProvider({
     <ProductsContext.Provider
       value={{
         products,
-        addAProductUnit,
+        productsSelected,
         updateInBatchProduct,
-        removeAProductUnit,
         removeProduct,
       }}
     >
