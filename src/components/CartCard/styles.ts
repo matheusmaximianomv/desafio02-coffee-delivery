@@ -4,7 +4,6 @@ export const CartCardContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 2.9rem;
 
   padding: 0.5rem 0.25rem;
   width: 23rem;

@@ -27,6 +27,7 @@ export function Home() {
 
   function handleChooseQuantityCard(event: IProduct): void {
     updateInBatchProduct(event.id, event.quantity);
+    alert(`O produto ${event.name} foi atualizado com sucesso!!`);
   }
 
   return (

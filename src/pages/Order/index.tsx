@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useId, useContext } from 'react';
 import {
   MapPinLine,
   CurrencyDollar,
@@ -7,12 +7,11 @@ import {
   Money,
 } from 'phosphor-react';
 
-import expressoImg from '../../assets/coffees/expresso.svg';
-import latteImg from '../../assets/coffees/latte.svg';
+import { ProductsContext } from '../../contexts/products/ProductsContext';
 
 import { Input } from '../../components/Input';
 import { IGroupSelectProps, GroupSelect } from '../../components/GroupSelect';
-import { ICartCardProps, CartCard } from '../../components/CartCard';
+import { CartCard } from '../../components/CartCard';
 import { Button } from '../../components/Button';
 
 import {
@@ -31,6 +30,11 @@ import {
 } from './styles';
 
 export function Order() {
+  const { products, updateInBatchProduct, removeProduct } =
+    useContext(ProductsContext);
+
+  const productsSelected = products.filter((product) => product.quantity > 0);
+
   const groupSelectProps: IGroupSelectProps = {
     options: [
       {
@@ -54,20 +58,13 @@ export function Order() {
     ],
   };
 
-  const coffeesSelected: ICartCardProps[] = [
-    {
-      coffeeImage: expressoImg,
-      name: 'Expresso Tradicional',
-      initialQuantity: 1,
-      price: 9.9,
-    },
-    {
-      coffeeImage: latteImg,
-      name: 'Latte',
-      initialQuantity: 1,
-      price: 9.9,
-    },
-  ];
+  function handleChangeQuantity(id: string, value: number): void {
+    updateInBatchProduct(id, value);
+  }
+
+  function handleRemoveItem(id: string): void {
+    removeProduct(id);
+  }
 
   return (
     <OrderContainer>
@@ -121,12 +118,22 @@ export function Order() {
         <OrderTitle>Cafés selecionados</OrderTitle>
 
         <OrderCardContainerCart>
-          {coffeesSelected.map((coffee) => (
-            <div key={coffee.name}>
-              <CartCard {...coffee} />
-              <OrderSeparator />
-            </div>
-          ))}
+          {productsSelected.map(
+            ({ id, coffeeImage, name, price, quantity }) => (
+              <div key={id}>
+                <CartCard
+                  id={id}
+                  coffeeImage={coffeeImage}
+                  name={name}
+                  price={price}
+                  initialQuantity={quantity}
+                  handleChangeQuantity={handleChangeQuantity}
+                  handleRemoveItem={handleRemoveItem}
+                />
+                <OrderSeparator />
+              </div>
+            )
+          )}
 
           <PurchaseSummaryContainer>
             <PurchaseSummaryItems>
