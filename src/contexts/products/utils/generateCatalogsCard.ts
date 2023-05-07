@@ -1,5 +1,4 @@
-import { ICatalogCardProps } from '../../../components/CatalogCard';
-import { IEventAddItems } from '../../../contexts/ProductsContext';
+import { IProduct } from '../ProductsContext';
 
 import expressoImg from '../../../assets/coffees/expresso.svg';
 import americanoImg from '../../../assets/coffees/americano.svg';
@@ -16,11 +15,8 @@ import havaianoImg from '../../../assets/coffees/havaiano.svg';
 import arabeImg from '../../../assets/coffees/arabe.svg';
 import irlandes from '../../../assets/coffees/irlandes.svg';
 
-export function generateCatalogsCard(
-  hashFunction: () => string,
-  handleEventClick: (event: IEventAddItems) => void
-): ICatalogCardProps[] {
-  const catalogOptions: ICatalogCardProps[] = [
+export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
+  const catalogOptions: IProduct[] = [
     {
       id: hashFunction(),
       coffeeImage: expressoImg,
@@ -28,7 +24,7 @@ export function generateCatalogsCard(
       name: 'Expresso Tradicional',
       description: 'O tradicional café feito com água quente e grãos moídos',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
     {
       id: hashFunction(),
@@ -37,7 +33,7 @@ export function generateCatalogsCard(
       name: 'Expresso Americano',
       description: 'Expresso diluído, menos intenso que o tradicional',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
     {
       id: hashFunction(),
@@ -46,7 +42,7 @@ export function generateCatalogsCard(
       name: 'Expresso Cremoso',
       description: 'Café expresso tradicional com espuma cremosa',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
     {
       id: hashFunction(),
@@ -55,7 +51,7 @@ export function generateCatalogsCard(
       name: 'Expresso Gelado',
       description: 'Bebida preparada com café expresso e cubos de gelo',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
     {
       id: hashFunction(),
@@ -64,7 +60,7 @@ export function generateCatalogsCard(
       name: 'Café com Leite',
       description: 'Meio a meio de expresso tradicional com leite vaporizado',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
     {
       id: hashFunction(),
@@ -74,7 +70,7 @@ export function generateCatalogsCard(
       description:
         'Uma dose de café expresso com o dobro de leite e espuma cremosa',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
     {
       id: hashFunction(),
@@ -84,7 +80,7 @@ export function generateCatalogsCard(
       description:
         'Bebida com canela feita de doses iguais de café, leite e espuma',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
     {
       id: hashFunction(),
@@ -94,7 +90,7 @@ export function generateCatalogsCard(
       description:
         'Café expresso misturado com um pouco de leite quente e espuma',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
     {
       id: hashFunction(),
@@ -103,7 +99,7 @@ export function generateCatalogsCard(
       name: 'Mocaccino',
       description: 'Café expresso com calda de chocolate, pouco leite e espuma',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
     {
       id: hashFunction(),
@@ -113,7 +109,7 @@ export function generateCatalogsCard(
       description:
         'Bebida feita com chocolate dissolvido no leite quente e café',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
     {
       id: hashFunction(),
@@ -123,7 +119,7 @@ export function generateCatalogsCard(
       description:
         'Drink gelado de café expresso com rum, creme de leite e hortelã',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
     {
       id: hashFunction(),
@@ -132,7 +128,7 @@ export function generateCatalogsCard(
       name: 'Havaiano',
       description: 'Bebida adocicada preparada com café e leite de coco',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
     {
       id: hashFunction(),
@@ -141,7 +137,7 @@ export function generateCatalogsCard(
       name: 'Árabe',
       description: 'Bebida preparada com grãos de café árabe e especiarias',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
     {
       id: hashFunction(),
@@ -150,7 +146,7 @@ export function generateCatalogsCard(
       name: 'Irlandês',
       description: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
       price: 9.99,
-      handleEventAddItemsToCart: handleEventClick,
+      quantity: 0,
     },
   ];
 

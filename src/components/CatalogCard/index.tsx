@@ -1,7 +1,7 @@
 import { ShoppingCartSimple } from 'phosphor-react';
 
 import { formatPrice } from '../../utils/formatPrice';
-import { IEventAddItems } from '../../contexts/ProductsContext';
+import { IProduct } from '../../contexts/products/ProductsContext';
 
 import { Counter } from '../Counter';
 import { Button } from '../Button';
@@ -27,7 +27,7 @@ export interface ICatalogCardProps {
   description: string;
   price: number;
   initialQuantity?: number;
-  handleEventAddItemsToCart: (event: IEventAddItems) => void;
+  handleEventAddItemsToCart: (event: IProduct) => void;
 }
 
 export function CatalogCard({
@@ -47,10 +47,14 @@ export function CatalogCard({
   }
 
   function handleAddItemsToCart(): void {
-    const event: IEventAddItems = {
+    const event: IProduct = {
       id,
       price,
       quantity,
+      coffeeImage,
+      tags,
+      name,
+      description,
     };
 
     handleEventAddItemsToCart(event);

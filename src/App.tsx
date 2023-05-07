@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { Router } from './Router';
 import { GlobalStyle, defaultTheme } from './styles';
-import { ProductsContextProvider } from './contexts/ProductsContext';
+import { ProductsContextProvider } from './contexts/products/ProductsContext';
 
 export function App() {
   return (

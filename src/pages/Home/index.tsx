@@ -1,8 +1,11 @@
-import { useId } from 'react';
+import { useContext } from 'react';
 import { ShoppingCart, Package, Coffee, Timer } from 'phosphor-react';
 
 import { CatalogCard } from '../../components/CatalogCard';
-import { IEventAddItems } from '../../contexts/ProductsContext';
+import {
+  IProduct,
+  ProductsContext,
+} from '../../contexts/products/ProductsContext';
 import coffeeImg from '../../assets/coffee.svg';
 
 import {
@@ -19,14 +22,12 @@ import {
   HomeCoffeeListOptions,
 } from './styles';
 
-import { generateCatalogsCard } from './utils/generateCatalogsCard';
-
 export function Home() {
-  function handleChooseQuantityCard(event: IEventAddItems): void {
-    console.log(event); // eslint-disable-line
-  }
+  const { products, updateInBatchProduct } = useContext(ProductsContext);
 
-  const catalogOptions = generateCatalogsCard(useId, handleChooseQuantityCard);
+  function handleChooseQuantityCard(event: IProduct): void {
+    updateInBatchProduct(event.id, event.quantity);
+  }
 
   return (
     <main>
@@ -79,8 +80,13 @@ export function Home() {
           <HomeCoffeeListTitle>Nossos cafés</HomeCoffeeListTitle>
 
           <HomeCoffeeListOptions>
-            {catalogOptions.map((catalog) => (
-              <CatalogCard key={catalog.id} {...catalog} />
+            {products.map((product) => (
+              <CatalogCard
+                key={product.id}
+                initialQuantity={product.quantity}
+                handleEventAddItemsToCart={handleChooseQuantityCard}
+                {...product}
+              />
             ))}
           </HomeCoffeeListOptions>
         </HomeCoffeeListContent>
