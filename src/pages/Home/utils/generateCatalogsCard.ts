@@ -1,7 +1,5 @@
-import {
-  IEventAddItems,
-  ICatalogCardProps,
-} from '../../../components/CatalogCard';
+import { ICatalogCardProps } from '../../../components/CatalogCard';
+import { IEventAddItems } from '../../../contexts/ProductsContext';
 
 import expressoImg from '../../../assets/coffees/expresso.svg';
 import americanoImg from '../../../assets/coffees/americano.svg';

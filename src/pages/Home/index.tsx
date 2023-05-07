@@ -1,7 +1,8 @@
 import { useId } from 'react';
 import { ShoppingCart, Package, Coffee, Timer } from 'phosphor-react';
 
-import { CatalogCard, IEventAddItems } from '../../components/CatalogCard';
+import { CatalogCard } from '../../components/CatalogCard';
+import { IEventAddItems } from '../../contexts/ProductsContext';
 import coffeeImg from '../../assets/coffee.svg';
 
 import {
@@ -22,7 +23,7 @@ import { generateCatalogsCard } from './utils/generateCatalogsCard';
 
 export function Home() {
   function handleChooseQuantityCard(event: IEventAddItems): void {
-    // console.log(event);
+    console.log(event); // eslint-disable-line
   }
 
   const catalogOptions = generateCatalogsCard(useId, handleChooseQuantityCard);

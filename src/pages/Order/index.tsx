@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import {
   MapPinLine,
   CurrencyDollar,
@@ -33,19 +34,19 @@ export function Order() {
   const groupSelectProps: IGroupSelectProps = {
     options: [
       {
-        id: '1',
+        id: useId(),
         label: 'Cartão de Crédito',
         renderIcon: (color, size) => <CreditCard size={size} color={color} />,
         selected: false,
       },
       {
-        id: '2',
+        id: useId(),
         label: 'Cartão de Débito',
         renderIcon: (color, size) => <Bank size={size} color={color} />,
         selected: false,
       },
       {
-        id: '3',
+        id: useId(),
         label: 'Dinheiro',
         renderIcon: (color, size) => <Money size={size} color={color} />,
         selected: false,
