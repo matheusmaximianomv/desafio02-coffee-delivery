@@ -8,6 +8,7 @@ import {
 } from 'phosphor-react';
 
 import { ProductsContext } from '../../contexts/products/ProductsContext';
+import { formatPrice } from '../../utils/formatPrice';
 
 import { Input } from '../../components/Input';
 import { IGroupSelectProps, GroupSelect } from '../../components/GroupSelect';
@@ -35,24 +36,32 @@ export function Order() {
 
   const productsSelected = products.filter((product) => product.quantity > 0);
 
+  const deliveryPrice = 3.5;
+  const totalPriceProductsSelected = products.reduce(
+    (accumulator, currentValue) =>
+      accumulator + currentValue.price * currentValue.quantity,
+    0
+  );
+  const totalDelivery = deliveryPrice + totalPriceProductsSelected;
+
   const groupSelectProps: IGroupSelectProps = {
     options: [
       {
         id: useId(),
         label: 'Cartão de Crédito',
-        renderIcon: (color, size) => <CreditCard size={size} color={color} />,
+        renderIcon: (color, size) => <CreditCard color={color} size={size} />,
         selected: false,
       },
       {
         id: useId(),
         label: 'Cartão de Débito',
-        renderIcon: (color, size) => <Bank size={size} color={color} />,
+        renderIcon: (color, size) => <Bank color={color} size={size} />,
         selected: false,
       },
       {
         id: useId(),
         label: 'Dinheiro',
-        renderIcon: (color, size) => <Money size={size} color={color} />,
+        renderIcon: (color, size) => <Money color={color} size={size} />,
         selected: false,
       },
     ],
@@ -138,17 +147,17 @@ export function Order() {
           <PurchaseSummaryContainer>
             <PurchaseSummaryItems>
               <span>Total de itens</span>
-              <span>R$ 29,70</span>
+              <span>R$ {formatPrice(totalPriceProductsSelected)}</span>
             </PurchaseSummaryItems>
 
             <PurchaseSummaryItems>
               <span>Entrega</span>
-              <span>R$ 3,50</span>
+              <span>R$ {formatPrice(deliveryPrice)}</span>
             </PurchaseSummaryItems>
 
             <PurchaseSummaryTotal>
               <span>Total</span>
-              <span>R$ 33,20</span>
+              <span>R$ {formatPrice(totalDelivery)}</span>
             </PurchaseSummaryTotal>
           </PurchaseSummaryContainer>
 
