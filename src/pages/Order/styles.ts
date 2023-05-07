@@ -101,6 +101,7 @@ export const OrderFieldGroup = styled.div`
 export const OrderSeparator = styled.div`
   width: 23rem;
   height: 0rem;
+  margin-top: 1.5rem;
 
   border: 1px solid ${(props) => props.theme['gray-300']};
 `;

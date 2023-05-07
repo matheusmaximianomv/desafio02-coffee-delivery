@@ -122,10 +122,10 @@ export function Order() {
 
         <OrderCardContainerCart>
           {coffeesSelected.map((coffee) => (
-            <>
-              <CartCard key={coffee.name} {...coffee} />
+            <div key={coffee.name}>
+              <CartCard {...coffee} />
               <OrderSeparator />
-            </>
+            </div>
           ))}
 
           <PurchaseSummaryContainer>
