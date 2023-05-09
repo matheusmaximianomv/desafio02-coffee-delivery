@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, Ref } from 'react';
 import styled from 'styled-components';
 
 export type TypeSizesInput =
@@ -12,6 +12,7 @@ export type TypeSizesInput =
 
 export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   width: TypeSizesInput;
+  ref: Ref<HTMLInputElement> | null;
   optional?: boolean;
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, forwardRef, Ref } from 'react';
 
 import {
   LabelContainer,
@@ -7,7 +7,10 @@ import {
   IInputProps,
 } from './styles';
 
-export function Input({ optional, ...props }: IInputProps) {
+const Input = forwardRef(function Input(
+  { optional, ...props }: IInputProps,
+  ref: Ref<HTMLInputElement> | null
+) {
   const [inputValue, setInputValue] = useState<string | number | null>(null);
   const [hasFocus, setHasFocus] = useState<boolean>(false);
 
@@ -26,8 +29,11 @@ export function Input({ optional, ...props }: IInputProps) {
         onBlur={(_) => {
           setHasFocus(false);
         }}
+        ref={ref}
       />
       {showOptionalInformation && <TagOptional>Opcional</TagOptional>}
     </LabelContainer>
   );
-}
+});
+
+export { Input };
