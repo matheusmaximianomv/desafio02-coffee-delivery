@@ -1,4 +1,4 @@
-import { useId, useContext } from 'react';
+import { useId, useContext, useState } from 'react';
 import {
   MapPinLine,
   CurrencyDollar,
@@ -14,7 +14,11 @@ import { ProductsContext } from '../../contexts/products/ProductsContext';
 import { formatPrice } from '../../utils/formatPrice';
 
 import { Input } from '../../components/Input';
-import { IGroupSelectProps, GroupSelect } from '../../components/GroupSelect';
+import {
+  IGroupSelectProps,
+  GroupSelect,
+  IGroupSelectEvent,
+} from '../../components/GroupSelect';
 import { CartCard } from '../../components/CartCard';
 import { Button } from '../../components/Button';
 
@@ -60,10 +64,14 @@ export function Order() {
   const { productsSelected, updateInBatchProduct, removeProduct } =
     useContext(ProductsContext);
 
-  const { register, getValues } = useForm<NewPurchaseFormData>({
+  const { register, getValues, formState } = useForm<NewPurchaseFormData>({
     defaultValues: defaultValuesForm,
     resolver: zodResolver(newPurchaseFormValidationSchema),
   });
+
+  const [formPayment, setFormPayment] = useState<IGroupSelectEvent | null>(
+    null
+  );
 
   const deliveryPrice = 3.5;
   const totalPriceProductsSelected = productsSelected.reduce(
@@ -73,7 +81,7 @@ export function Order() {
   );
   const totalDelivery = deliveryPrice + totalPriceProductsSelected;
 
-  const groupSelectProps: IGroupSelectProps = {
+  const groupSelectProps: Pick<IGroupSelectProps, 'options'> = {
     options: [
       {
         id: useId(),
@@ -96,6 +104,9 @@ export function Order() {
     ],
   };
 
+  const buttonIsDisabled =
+    !formState.isValid || !formPayment || !productsSelected.length;
+
   function handleChangeQuantity(id: string, value: number): void {
     updateInBatchProduct(id, value);
   }
@@ -105,7 +116,9 @@ export function Order() {
   }
 
   function handleSubmitPurchase(): void {
-    console.log(getValues());
+    if (!buttonIsDisabled) {
+      console.log(getValues());
+    }
   }
 
   return (
@@ -177,7 +190,12 @@ export function Order() {
             </div>
           </OrderCardTitle>
 
-          <GroupSelect options={groupSelectProps.options} />
+          <GroupSelect
+            options={groupSelectProps.options}
+            onChangeOption={(event) => {
+              setFormPayment(event);
+            }}
+          />
         </OrderCardContainer>
       </OrderColumn>
 
@@ -225,6 +243,7 @@ export function Order() {
                 variant="primary"
                 size="lg"
                 onClick={handleSubmitPurchase}
+                disabled={buttonIsDisabled}
               >
                 Confirmar Pedido
               </Button>

@@ -2,11 +2,17 @@ import { useState } from 'react';
 
 import { IGroupSelectOptions, GroupSelectContainer, Select } from './styles';
 
-export interface IGroupSelectProps {
-  options: IGroupSelectOptions[];
+export interface IGroupSelectEvent {
+  id: string;
+  label: string;
 }
 
-export function GroupSelect({ options }: IGroupSelectProps) {
+export interface IGroupSelectProps {
+  options: IGroupSelectOptions[];
+  onChangeOption: (event: IGroupSelectEvent) => void;
+}
+
+export function GroupSelect({ options, onChangeOption }: IGroupSelectProps) {
   const [optionSelectedId, setOptionSelectedId] = useState<string | null>(
     () => {
       const hasOptionSelected = options.find((option) => option.selected);
@@ -19,9 +25,13 @@ export function GroupSelect({ options }: IGroupSelectProps) {
     }
   );
 
-  function handleSetSelectOption(idTarget: string): void {
-    setOptionSelectedId(idTarget);
-    options.forEach((option) => (option.selected = option.id === idTarget));
+  function setSelectOption(id: string, label: string): void {
+    setOptionSelectedId(id);
+    options.forEach((option) => (option.selected = option.id === id));
+    onChangeOption({
+      id,
+      label,
+    });
   }
 
   return (
@@ -31,7 +41,7 @@ export function GroupSelect({ options }: IGroupSelectProps) {
           key={id}
           selected={id === optionSelectedId}
           onClick={() => {
-            handleSetSelectOption(id);
+            setSelectOption(id, label);
           }}
         >
           {renderIcon('#8047F8', 18)}

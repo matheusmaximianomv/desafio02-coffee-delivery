@@ -81,6 +81,13 @@ export const ButtonContainer = styled.button<IButtonProps>`
       props.theme[colorsOptionsButton[props.variant].backgroundHover]};
     transition: background-color 0.25s;
   }
+
+  &:disabled {
+    background-color: ${(props) => props.theme['gray-400']};
+    color: ${(props) => props.theme['gray-500']};
+    transition: background-color 0.25s;
+    cursor: not-allowed;
+  }
 `;
 
 export const ButtonBadge = styled.span`
