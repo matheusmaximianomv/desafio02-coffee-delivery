@@ -4,7 +4,7 @@ interface IOrderCardTitleProps {
   variant: keyof DefaultTheme;
 }
 
-export const OrderContainer = styled.form`
+export const OrderContainer = styled.main`
   max-width: 70rem;
   margin: 0 auto;
   margin-top: 2.5rem;

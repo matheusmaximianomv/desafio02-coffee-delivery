@@ -7,6 +7,8 @@ import {
   Money,
 } from 'phosphor-react';
 import { useForm } from 'react-hook-form';
+import * as zod from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { ProductsContext } from '../../contexts/products/ProductsContext';
 import { formatPrice } from '../../utils/formatPrice';
@@ -32,20 +34,35 @@ import {
   TitleNoData,
 } from './styles';
 
+const defaultValuesForm = {
+  cep: '',
+  publicPlace: '',
+  number: '',
+  complement: '',
+  neighborhood: '',
+  city: '',
+  uf: '',
+};
+
+const newPurchaseFormValidationSchema = zod.object({
+  cep: zod.string().min(1, 'Cep Inválido.').max(9, 'Cep Inválido.'),
+  publicPlace: zod.string().min(5, 'Digite um endereço válido.'),
+  number: zod.string().min(1, 'Digite um número de residência válido.'),
+  complement: zod.string(),
+  neighborhood: zod.string().min(5, 'Digite um bairro válido.'),
+  city: zod.string().min(5, 'Digite uma cidade válida.'),
+  uf: zod.string().length(2, 'Digite uma união federativa válida.'),
+});
+
+type NewPurchaseFormData = zod.infer<typeof newPurchaseFormValidationSchema>;
+
 export function Order() {
   const { productsSelected, updateInBatchProduct, removeProduct } =
     useContext(ProductsContext);
 
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      cep: '',
-      publicPlace: '',
-      number: '',
-      complement: '',
-      neighborhood: '',
-      city: '',
-      uf: '',
-    },
+  const { register, getValues } = useForm<NewPurchaseFormData>({
+    defaultValues: defaultValuesForm,
+    resolver: zodResolver(newPurchaseFormValidationSchema),
   });
 
   const deliveryPrice = 3.5;
@@ -87,10 +104,12 @@ export function Order() {
     removeProduct(id);
   }
 
-  function handleConfirmPurchase(data: any): void {}
+  function handleSubmitPurchase(): void {
+    console.log(getValues());
+  }
 
   return (
-    <OrderContainer onSubmit={handleSubmit(handleConfirmPurchase)}>
+    <OrderContainer>
       <OrderColumn>
         <OrderTitle>Complete seu pedido</OrderTitle>
 
@@ -202,7 +221,11 @@ export function Order() {
                 </PurchaseSummaryTotal>
               </PurchaseSummaryContainer>
 
-              <Button variant="primary" size="lg" type="submit">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={handleSubmitPurchase}
+              >
                 Confirmar Pedido
               </Button>
             </>
