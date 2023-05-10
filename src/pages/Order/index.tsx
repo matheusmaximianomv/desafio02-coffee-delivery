@@ -6,6 +6,7 @@ import {
   Bank,
   Money,
 } from 'phosphor-react';
+import { useForm } from 'react-hook-form';
 
 import { ProductsContext } from '../../contexts/products/ProductsContext';
 import { formatPrice } from '../../utils/formatPrice';
@@ -34,6 +35,18 @@ import {
 export function Order() {
   const { productsSelected, updateInBatchProduct, removeProduct } =
     useContext(ProductsContext);
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      cep: '',
+      publicPlace: '',
+      number: '',
+      complement: '',
+      neighborhood: '',
+      city: '',
+      uf: '',
+    },
+  });
 
   const deliveryPrice = 3.5;
   const totalPriceProductsSelected = productsSelected.reduce(
@@ -74,8 +87,10 @@ export function Order() {
     removeProduct(id);
   }
 
+  function handleConfirmPurchase(data: any): void {}
+
   return (
-    <OrderContainer>
+    <OrderContainer onSubmit={handleSubmit(handleConfirmPurchase)}>
       <OrderColumn>
         <OrderTitle>Complete seu pedido</OrderTitle>
 
@@ -90,18 +105,43 @@ export function Order() {
           </OrderCardTitle>
 
           <OrderCardForm>
-            <Input placeholder="CEP" width="sm" />
-            <Input placeholder="Logradouro" width="xl" />
+            <Input placeholder="CEP" width="sm" required {...register('cep')} />
+            <Input
+              placeholder="Logradouro"
+              width="xl"
+              required
+              {...register('publicPlace')}
+            />
 
             <OrderFieldGroup>
-              <Input placeholder="Número" width="sm" />
-              <Input placeholder="Complemento" width="lg" optional />
+              <Input
+                placeholder="Número"
+                width="sm"
+                required
+                {...register('number')}
+              />
+              <Input
+                placeholder="Complemento"
+                width="lg"
+                optional
+                {...register('complement')}
+              />
             </OrderFieldGroup>
 
             <OrderFieldGroup>
-              <Input placeholder="Bairro" width="sm" />
-              <Input placeholder="Cidade" width="md" />
-              <Input placeholder="UF" width="xs" />
+              <Input
+                placeholder="Bairro"
+                width="sm"
+                required
+                {...register('neighborhood')}
+              />
+              <Input
+                placeholder="Cidade"
+                width="md"
+                required
+                {...register('city')}
+              />
+              <Input placeholder="UF" width="xs" required {...register('uf')} />
             </OrderFieldGroup>
           </OrderCardForm>
         </OrderCardContainer>
@@ -162,7 +202,7 @@ export function Order() {
                 </PurchaseSummaryTotal>
               </PurchaseSummaryContainer>
 
-              <Button variant="primary" size="lg">
+              <Button variant="primary" size="lg" type="submit">
                 Confirmar Pedido
               </Button>
             </>
