@@ -9,6 +9,7 @@ import {
 import { useForm } from 'react-hook-form';
 import * as zod from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 
 import { ProductsContext } from '../../contexts/products/ProductsContext';
 import { formatPrice } from '../../utils/formatPrice';
@@ -61,8 +62,12 @@ const newPurchaseFormValidationSchema = zod.object({
 type NewPurchaseFormData = zod.infer<typeof newPurchaseFormValidationSchema>;
 
 export function Order() {
-  const { productsSelected, updateInBatchProduct, removeProduct } =
-    useContext(ProductsContext);
+  const {
+    productsSelected,
+    updateInBatchProduct,
+    removeProduct,
+    finishPurchase,
+  } = useContext(ProductsContext);
 
   const { register, getValues, formState } = useForm<NewPurchaseFormData>({
     defaultValues: defaultValuesForm,
@@ -72,6 +77,8 @@ export function Order() {
   const [formPayment, setFormPayment] = useState<IGroupSelectEvent | null>(
     null
   );
+
+  const navigate = useNavigate();
 
   const deliveryPrice = 3.5;
   const totalPriceProductsSelected = productsSelected.reduce(
@@ -116,8 +123,11 @@ export function Order() {
   }
 
   function handleSubmitPurchase(): void {
-    if (!buttonIsDisabled) {
-      console.log(getValues());
+    if (!buttonIsDisabled && formPayment) {
+      const { cep, ...address } = getValues();
+
+      finishPurchase(address, formPayment);
+      navigate('/confirmation');
     }
   }
 

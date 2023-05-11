@@ -1,4 +1,9 @@
-import { EnumActionsProductReducer, IProductActionReducer } from './reducer';
+import {
+  EnumActionsProductReducer,
+  IProductActionReducer,
+  IAddress,
+  IPayment,
+} from './reducer';
 
 export function updateQuantityProductsAction(
   id: string,
@@ -21,5 +26,25 @@ export function removeQuantityProductsAction(
     payload: {
       id,
     },
+  };
+}
+
+export function finishPurchaseAction(
+  address: IAddress,
+  payment: IPayment
+): IProductActionReducer {
+  return {
+    type: EnumActionsProductReducer.FINISH_PURCHASE,
+    payload: {
+      address,
+      payment,
+    },
+  };
+}
+
+export function resetCartAction(): IProductActionReducer {
+  return {
+    type: EnumActionsProductReducer.RESET_CART,
+    payload: {},
   };
 }
