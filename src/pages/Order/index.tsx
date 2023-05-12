@@ -147,11 +147,18 @@ export function Order() {
           </OrderCardTitle>
 
           <OrderCardForm>
-            <Input placeholder="CEP" width="sm" required {...register('cep')} />
+            <Input
+              placeholder="CEP"
+              width="sm"
+              required
+              autoComplete="off"
+              {...register('cep')}
+            />
             <Input
               placeholder="Logradouro"
               width="xl"
               required
+              autoComplete="off"
               {...register('publicPlace')}
             />
 
@@ -160,11 +167,13 @@ export function Order() {
                 placeholder="Número"
                 width="sm"
                 required
+                autoComplete="off"
                 {...register('number')}
               />
               <Input
                 placeholder="Complemento"
                 width="lg"
+                autoComplete="off"
                 optional
                 {...register('complement')}
               />
@@ -174,16 +183,24 @@ export function Order() {
               <Input
                 placeholder="Bairro"
                 width="sm"
+                autoComplete="off"
                 required
                 {...register('neighborhood')}
               />
               <Input
                 placeholder="Cidade"
                 width="md"
+                autoComplete="off"
                 required
                 {...register('city')}
               />
-              <Input placeholder="UF" width="xs" required {...register('uf')} />
+              <Input
+                placeholder="UF"
+                width="xs"
+                autoComplete="off"
+                required
+                {...register('uf')}
+              />
             </OrderFieldGroup>
           </OrderCardForm>
         </OrderCardContainer>
