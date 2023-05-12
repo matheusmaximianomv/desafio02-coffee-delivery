@@ -1,6 +1,9 @@
+import { useContext, useEffect } from 'react';
 import { MapPin, Timer, CurrencyDollar } from 'phosphor-react';
 
 import deliveryMan from '../../assets/deliveryman.svg';
+
+import { ProductsContext } from '../../contexts/products/ProductsContext';
 
 import {
   ConfirmationContainer,
@@ -14,6 +17,32 @@ import {
 } from './styles';
 
 export function Confirmation() {
+  const { address, payment, clearProducts } = useContext(ProductsContext);
+
+  function completeAddress(): string {
+    if (address) {
+      const { publicPlace, number } = address;
+      return `${publicPlace}, ${number}`;
+    }
+
+    return '';
+  }
+
+  function place(): string {
+    if (address) {
+      const { neighborhood, city, uf } = address;
+      return `${neighborhood} - ${city}, ${uf}`;
+    }
+
+    return '';
+  }
+
+  useEffect(() => {
+    return () => {
+      clearProducts();
+    };
+  }, []);
+
   return (
     <ConfirmationContainer>
       <ConfirmationContent>
@@ -31,9 +60,9 @@ export function Confirmation() {
 
               <ConfirmationInfoText>
                 <span>
-                  Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                  Entrega em <strong>{completeAddress()}</strong>
                 </span>
-                <span>Farrapos - Porto Alegre, RS</span>
+                <span>{place()}</span>
               </ConfirmationInfoText>
             </ConfirmationInfoContainer>
 
@@ -55,7 +84,7 @@ export function Confirmation() {
 
               <ConfirmationInfoText>
                 <span>Pagamento na entrega</span>
-                <strong>Cartão de Crédito</strong>
+                <strong>{payment ? payment.label : ''}</strong>
               </ConfirmationInfoText>
             </ConfirmationInfoContainer>
           </ConfirmationOrderInfo>

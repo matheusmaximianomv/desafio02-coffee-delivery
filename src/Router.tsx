@@ -9,10 +9,10 @@ import { Order } from './pages/Order';
 import { Confirmation } from './pages/Confirmation';
 
 export function Router() {
-  const { productsSelected, address, payment } = useContext(ProductsContext);
+  const { address, payment } = useContext(ProductsContext);
 
   function elementPathConfirmationByAccess(): JSX.Element {
-    const allDataValid = !!(productsSelected.length && address && payment);
+    const allDataValid = !!(address && payment);
 
     return allDataValid ? <Confirmation /> : <Navigate to="/" />;
   }
