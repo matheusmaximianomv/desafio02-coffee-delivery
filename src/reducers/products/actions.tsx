@@ -29,6 +29,13 @@ export function removeQuantityProductsAction(
   };
 }
 
+export function clearProductsAction(): IProductActionReducer {
+  return {
+    type: EnumActionsProductReducer.CLEAR_PRODUCTS_IN_CART,
+    payload: {},
+  };
+}
+
 export function finishPurchaseAction(
   address: IAddress,
   payment: IPayment
@@ -39,12 +46,5 @@ export function finishPurchaseAction(
       address,
       payment,
     },
-  };
-}
-
-export function resetCartAction(): IProductActionReducer {
-  return {
-    type: EnumActionsProductReducer.RESET_CART,
-    payload: {},
   };
 }

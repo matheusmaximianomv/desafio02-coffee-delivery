@@ -7,8 +7,8 @@ import {
   IPayment,
   updateQuantityProductsAction,
   removeQuantityProductsAction,
+  clearProductsAction,
   finishPurchaseAction,
-  resetCartAction,
 } from '../../reducers/products';
 
 import { generateCatalogsCard } from './utils/generateCatalogsCard';
@@ -24,8 +24,8 @@ interface IProductContextData {
   payment?: IPayment;
   updateInBatchProduct: (id: string, quantity: number) => void;
   removeProduct: (id: string) => void;
+  clearProducts: () => void;
   finishPurchase: (address: IAddress, payment: IPayment) => void;
-  resetCart: () => void;
 }
 
 export const ProductsContext = createContext<IProductContextData>(
@@ -54,8 +54,8 @@ export function ProductsContextProvider({
     dispatch(finishPurchaseAction(address, payment));
   }
 
-  function resetCart(): void {
-    dispatch(resetCartAction());
+  function clearProducts(): void {
+    dispatch(clearProductsAction());
   }
 
   return (
@@ -68,7 +68,7 @@ export function ProductsContextProvider({
         updateInBatchProduct,
         removeProduct,
         finishPurchase,
-        resetCart,
+        clearProducts,
       }}
     >
       {children}

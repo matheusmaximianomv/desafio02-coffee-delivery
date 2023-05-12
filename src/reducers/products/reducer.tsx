@@ -34,8 +34,8 @@ interface IProductState {
 export enum EnumActionsProductReducer {
   UPDATE_QUANTITY_PRODUCTS_IN_CART = 'UPDATE_QUANTITY_PRODUCTS_IN_CART',
   REMOVE_PRODUCT_IN_CART = 'REMOVE_PRODUCT_IN_CART',
+  CLEAR_PRODUCTS_IN_CART = 'CLEAR_PRODUCTS_IN_CART',
   FINISH_PURCHASE = 'FINISH_PURCHASE',
-  RESET_CART = 'RESET_CART',
 }
 
 interface IPayloadActionReducer {
@@ -103,6 +103,16 @@ function removeQuantityProducts(
   });
 }
 
+function clearProducts(
+  state: IProductState,
+  _: IPayloadActionReducer
+): IProductState {
+  return produce(state, (draft) => {
+    draft.products.forEach((product) => (product.quantity = 0));
+    draft.productsSelected = [];
+  });
+}
+
 function finishPurchase(
   state: IProductState,
   { address, payment }: IPayloadActionReducer
@@ -115,19 +125,6 @@ function finishPurchase(
   });
 }
 
-function resetCart(
-  state: IProductState,
-  _: IPayloadActionReducer
-): IProductState {
-  return produce(state, (draft) => {
-    delete draft.address;
-    delete draft.payment;
-
-    draft.products.forEach((product) => (product.quantity = 0));
-    draft.productsSelected = [];
-  });
-}
-
 export function productReducer(
   state: IProductState,
   action: IProductActionReducer
@@ -135,8 +132,8 @@ export function productReducer(
   const actionsByState: TypeActionsByState = {
     UPDATE_QUANTITY_PRODUCTS_IN_CART: updateQuantityProducts,
     REMOVE_PRODUCT_IN_CART: removeQuantityProducts,
+    CLEAR_PRODUCTS_IN_CART: clearProducts,
     FINISH_PURCHASE: finishPurchase,
-    RESET_CART: resetCart,
   };
 
   const actionFunction = actionsByState[action.type];
