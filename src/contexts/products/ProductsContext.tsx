@@ -1,4 +1,5 @@
-import { ReactNode, createContext, useReducer, useId } from 'react';
+import { ReactNode, createContext, useReducer, useEffect } from 'react';
+import { produce } from 'immer';
 
 import {
   productReducer,
@@ -28,6 +29,8 @@ interface IProductContextData {
   finishPurchase: (address: IAddress, payment: IPayment) => void;
 }
 
+const KEY_STORAGE = '@ignite-coffee-delivery:products-state-1.0.0';
+
 export const ProductsContext = createContext<IProductContextData>(
   {} as IProductContextData
 );
@@ -35,10 +38,38 @@ export const ProductsContext = createContext<IProductContextData>(
 export function ProductsContextProvider({
   children,
 }: IProductsContextProviderProps) {
-  const [productsState, dispatch] = useReducer(productReducer, {
-    products: generateCatalogsCard(useId),
-    productsSelected: [],
-  });
+  const [productsState, dispatch] = useReducer(
+    productReducer,
+    {
+      products: generateCatalogsCard(),
+      productsSelected: [],
+    },
+    (initialState) => {
+      const stateJSON = localStorage.getItem(KEY_STORAGE);
+
+      if (stateJSON) {
+        const { productsSelected } = JSON.parse(
+          stateJSON
+        ) as IProductContextData;
+
+        return produce(initialState, (draft) => {
+          draft.products.forEach((product) => {
+            const productSavedInLocalStorage = productsSelected.find(
+              (productTarget) => productTarget.id === product.id
+            );
+
+            if (productSavedInLocalStorage) {
+              product.quantity = productSavedInLocalStorage.quantity;
+            }
+          });
+
+          (draft.productsSelected as IProduct[]) = productsSelected;
+        });
+      }
+
+      return initialState;
+    }
+  );
 
   const { products, productsSelected, address, payment } = productsState;
 
@@ -57,6 +88,16 @@ export function ProductsContextProvider({
   function clearProducts(): void {
     dispatch(clearProductsAction());
   }
+
+  useEffect(() => {
+    const productsSelectedObject = {
+      productsSelected,
+    };
+
+    const stateJSON = JSON.stringify(productsSelectedObject);
+
+    localStorage.setItem(KEY_STORAGE, stateJSON);
+  }, [productsSelected]);
 
   return (
     <ProductsContext.Provider

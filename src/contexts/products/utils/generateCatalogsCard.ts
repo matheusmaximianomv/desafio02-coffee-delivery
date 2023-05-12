@@ -15,10 +15,10 @@ import havaianoImg from '../../../assets/coffees/havaiano.svg';
 import arabeImg from '../../../assets/coffees/arabe.svg';
 import irlandes from '../../../assets/coffees/irlandes.svg';
 
-export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
+export function generateCatalogsCard(): IProduct[] {
   const catalogOptions: IProduct[] = [
     {
-      id: hashFunction(),
+      id: '1',
       coffeeImage: expressoImg,
       tags: ['Tradicional'],
       name: 'Expresso Tradicional',
@@ -27,7 +27,7 @@ export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
       quantity: 0,
     },
     {
-      id: hashFunction(),
+      id: '2',
       coffeeImage: americanoImg,
       tags: ['Tradicional'],
       name: 'Expresso Americano',
@@ -36,7 +36,7 @@ export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
       quantity: 0,
     },
     {
-      id: hashFunction(),
+      id: '3',
       coffeeImage: cremosoImg,
       tags: ['Tradicional'],
       name: 'Expresso Cremoso',
@@ -45,7 +45,7 @@ export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
       quantity: 0,
     },
     {
-      id: hashFunction(),
+      id: '4',
       coffeeImage: geladoImg,
       tags: ['Tradicional', 'Gelado'],
       name: 'Expresso Gelado',
@@ -54,7 +54,7 @@ export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
       quantity: 0,
     },
     {
-      id: hashFunction(),
+      id: '5',
       coffeeImage: cafeComLeiteImg,
       tags: ['Tradicional', 'Com Leite'],
       name: 'Café com Leite',
@@ -63,7 +63,7 @@ export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
       quantity: 0,
     },
     {
-      id: hashFunction(),
+      id: '6',
       coffeeImage: latteImg,
       tags: ['Tradicional', 'Com Leite'],
       name: 'Latte',
@@ -73,7 +73,7 @@ export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
       quantity: 0,
     },
     {
-      id: hashFunction(),
+      id: '7',
       coffeeImage: capuccinoImg,
       tags: ['Tradicional', 'Com Leite'],
       name: 'Capuccino',
@@ -83,7 +83,7 @@ export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
       quantity: 0,
     },
     {
-      id: hashFunction(),
+      id: '8',
       coffeeImage: macchiatoImg,
       tags: ['Tradicional', 'Com Leite'],
       name: 'Macchiato',
@@ -93,7 +93,7 @@ export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
       quantity: 0,
     },
     {
-      id: hashFunction(),
+      id: '9',
       coffeeImage: mocaccinoImg,
       tags: ['Tradicional', 'Com Leite'],
       name: 'Mocaccino',
@@ -102,7 +102,7 @@ export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
       quantity: 0,
     },
     {
-      id: hashFunction(),
+      id: '10',
       coffeeImage: chocolateQuenteImg,
       tags: ['Especial', 'Com Leite'],
       name: 'Chocolate Quente',
@@ -112,7 +112,7 @@ export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
       quantity: 0,
     },
     {
-      id: hashFunction(),
+      id: '11',
       coffeeImage: cubanoImg,
       tags: ['Especial', 'Alcoólico', 'Gelado'],
       name: 'Cubano',
@@ -122,7 +122,7 @@ export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
       quantity: 0,
     },
     {
-      id: hashFunction(),
+      id: '12',
       coffeeImage: havaianoImg,
       tags: ['Especial'],
       name: 'Havaiano',
@@ -131,7 +131,7 @@ export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
       quantity: 0,
     },
     {
-      id: hashFunction(),
+      id: '13',
       coffeeImage: arabeImg,
       tags: ['Especial'],
       name: 'Árabe',
@@ -140,7 +140,7 @@ export function generateCatalogsCard(hashFunction: () => string): IProduct[] {
       quantity: 0,
     },
     {
-      id: hashFunction(),
+      id: '14',
       coffeeImage: irlandes,
       tags: ['Especial', 'Alcoólico'],
       name: 'Irlandês',
