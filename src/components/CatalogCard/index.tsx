@@ -1,7 +1,7 @@
 import { ShoppingCartSimple } from 'phosphor-react';
 
 import { formatPrice } from '../../utils/formatPrice';
-import { IProduct } from '../../contexts/products/ProductsContext';
+import { IProduct } from '../../reducers/products';
 
 import { Counter } from '../Counter';
 import { Button } from '../Button';

@@ -1,4 +1,4 @@
-import { IProduct } from '../ProductsContext';
+import { IProduct } from '../../../reducers/products';
 
 import expressoImg from '../../../assets/coffees/expresso.svg';
 import americanoImg from '../../../assets/coffees/americano.svg';
