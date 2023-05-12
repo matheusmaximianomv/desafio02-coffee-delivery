@@ -124,6 +124,7 @@ function resetCart(
     delete draft.payment;
 
     draft.products.forEach((product) => (product.quantity = 0));
+    draft.productsSelected = [];
   });
 }
 
